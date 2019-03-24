@@ -3,12 +3,19 @@ import styled from 'styled-components';
 
 
 export default styled.div`
-  width: 499px;
-  height: 499px;
+  width: auto;
   display: flex;
+  min-width: 490px;
   flex-wrap: wrap;
-  align-content: space-between;
-  justify-content: space-between;
   background-color: #dcdcdc;
   border: 1px solid #dcdcdc;
+  border-right: 0;
+  border-bottom: 0;
+
+
+  & button {
+    height: ${props => `${((499 - props.colsNumber) / props.colsNumber)}px`};
+    width: ${props => `calc(100% * ${(1 / props.colsNumber)} - 1px)`};
+  }
+
 `;  

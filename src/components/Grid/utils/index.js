@@ -1,120 +1,76 @@
+export const directions = ['N', 'E', 'S', 'W'];
 
-export const findShortestPath = (PathStartCoordinates, grid) => {
-    const fromTop = PathStartCoordinates[0];
-    const fromLeft = PathStartCoordinates[1];
-    const newGrid = [...grid];
-
-    const location = {
-        fromTop,
-        fromLeft,
-        path: [],
-        status: 'PathStart'
-    };
-
-    // Initialize the queue with the PathStart location already inside
-    const queue = [location];
-
-    while (queue.length > 0) {
-        // Take the first location off the queue
-
-        console.log(queue)
-        const currentLocation = queue.shift();
-
-        // Explore North
-        let newLocation = exploreInDirection(currentLocation, 'North', newGrid);
-        if (newLocation.status === 'PathEnd') {
-            return newLocation.path;
-        } else if (newLocation.status === 'Valid') {
-            queue.push(newLocation);
-        }
-
-        // Explore East
-        newLocation = exploreInDirection(currentLocation, 'East', newGrid);
-        if (newLocation.status === 'PathEnd') {
-            return newLocation.path;
-        } else if (newLocation.status === 'Valid') {
-            queue.push(newLocation);
-        }
-
-        // Explore South
-        newLocation = exploreInDirection(currentLocation, 'South', newGrid);
-        if (newLocation.status === 'PathEnd') {
-            return newLocation.path;
-        } else if (newLocation.status === 'Valid') {
-            queue.push(newLocation);
-        }
-
-        // Explore West
-        newLocation = exploreInDirection(currentLocation, 'West', newGrid);
-        if (newLocation.status === 'PathEnd') {
-            return newLocation.path;
-        } else if (newLocation.status === 'Valid') {
-            queue.push(newLocation);
-        }
-    }
-
-    // No valid path found
-    return false;
-
-};
-
-
-const locationStatus = (location, newGrid) => {
-    const gridSize = newGrid.length;
-    const dft = location.fromTop;
-    const dfl = location.fromLeft;
-
-    if (location.fromLeft < 0 ||
-        location.fromLeft >= gridSize ||
-        location.fromTop < 0 ||
-        location.fromTop >= gridSize) {
-
-        // location is not on the grid--return false
-        return 'Invalid';
-    } else if (newGrid[dft][dfl] === 'end') {
-        return 'PathEnd';
-    } else if (newGrid[dft][dfl] !== 'default') {
-        // location is either an obstacle or has been visited
-        return 'Blocked';
-    } else {
-        return 'Valid';
+export const getForwardCoordsFromQuadrant = (quadrant, x, y) => {
+    switch (quadrant) {
+        case 'E':
+            return {
+                x: x + 1,
+                y
+            };
+        case 'S':
+            return {
+                x,
+                y: y + 1
+            };
+        case 'W':
+            return {
+                x: x - 1,
+                y
+            };
+        case 'N':
+            return {
+                x,
+                y: y - 1
+            };
+        default:
+            return { x: -1, y: -1 };
     }
 };
 
-
-// Explores the grid from the given location in the given
-// direction
-const exploreInDirection = (currentLocation, direction, newGrid) => {
-    var newPath = currentLocation.path.slice();
-    newPath.push(direction);
-
-    var dft = currentLocation.fromTop;
-    var dfl = currentLocation.fromLeft;
-
-    if (direction === 'North') {
-        dft -= 1;
-    } else if (direction === 'East') {
-        dfl += 1;
-    } else if (direction === 'South') {
-        dft += 1;
-    } else if (direction === 'West') {
-        dfl -= 1;
+const bestPathFinder = (paths) => {
+    if (paths.length < 1) {
+        return paths;
     }
+    const bestPath = [...paths].sort((a, b) => a.length - b.length);
+    return bestPath[0];
+}
 
-    const newLocation = {
-        fromTop: dft,
-        fromLeft: dfl,
-        path: newPath,
-        status: 'Unknown'
-    };
-    newLocation.status = locationStatus(newLocation, newGrid);
 
-    // If this new location is valid, mark it as 'Visited'
+export const pathFinder = (grid, prevY, prevX, queue, paths) => {
     
-    if (newLocation.status === 'Valid') {
-        newGrid[newLocation.fromTop][newLocation.fromLeft] = 'Visited';
+    const actuaQueue = [...queue];
+    
+    if (actuaQueue.includes('end')) {
+        paths.push(actuaQueue)
+        return bestPathFinder([...paths, actuaQueue]);
     }
 
-    return newLocation;
-};
+    directions.forEach((dir) => {
+        const { x, y } = getForwardCoordsFromQuadrant(dir, prevX, prevY);
 
+        if (grid[y] && grid[y][x]) {
+
+            if (grid[y][x] === 'end') {
+
+                const fixAdiacentStartEnd = grid[prevY][prevX] === 'start' ? [] : [`${prevY}_${prevX}`];
+
+                return pathFinder(grid, y, x, [...queue, ...fixAdiacentStartEnd, `end`], paths)
+
+
+            } else if (grid[y][x] === 'clear') {
+                const value = (grid[y][x] === 'start') ? 'start' : `${y}_${x}`;
+                if (!actuaQueue.includes(value)) {
+                    const elementToAdd = value === 'start' ? [] : [value];
+                    pathFinder(grid, y, x, [...queue, ...elementToAdd], paths)
+                } else {
+                    return actuaQueue;
+                }
+            }
+            return actuaQueue;
+        }
+        return actuaQueue;
+
+    })
+
+    return bestPathFinder(paths);
+}

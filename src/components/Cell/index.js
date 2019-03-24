@@ -9,7 +9,7 @@ export default class Cell extends PureComponent {
     static propTypes = {
         children: oneOfType([node, element, func]),
         onClick: func,
-        type: oneOf(['default', 'clear', 'start', 'end', 'path']),
+        type: oneOf(['default', 'clear', 'start', 'end', 'path', 'Visited']),
        
     };
 

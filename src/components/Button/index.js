@@ -13,15 +13,14 @@ export default class Button extends PureComponent {
 
     
     render() {
-        const {
-            className = '', onClick, children
+        const {onClick, children, ...rest
         } = this.props;
 
       
 
         return (
             <ThemeProvider theme={{ button: 'default' }}>
-                <ButtonWrapper className={className} onClick={onClick}>
+                <ButtonWrapper onClick={onClick} {...rest}>
                     {children}
                 </ButtonWrapper>
             </ThemeProvider>
