@@ -65,9 +65,13 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 # logic
 
 
-I didn't use typescript, just because I'm much faster with jsx and preferred to concentrate on a robust algorithm;
+I didn't use typescript, just because I'm much faster with jsx and preferred to concentrate on a robust algorithm.
+
 I've removed the option '1' for rows and columns, because the path does't make sense.
+
 I've kept the option '2' for rows and columns, but when 'start' and 'end' are next, that is the best path.
+
 The logic is: navigate the 4 directions, in a recursive function, starting from 'start', continuing to navigate until there is a 'clear' and then saving the position only when 'end' is reached.
-I took a look at the existing bfs library, but then I decided to create my own custom function ('pathFinder' inside src/components/Grid/utils/index.js) 
+
+I took a look at the existing bfs library, but then I decided to create my own custom function ('pathFinder' inside https://github.com/barabba9174/test/blob/master/src/components/Grid/utils/index.js) 
 
