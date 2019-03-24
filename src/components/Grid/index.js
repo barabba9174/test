@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import Cell from '../Cell';
-import {pathFinder} from './utils';
+import { pathFinder } from './utils';
 
 import {
     oneOfType,
@@ -20,6 +20,7 @@ export default class Grid extends Component {
         rows: number,
         cols: number
     };
+
 
     constructor({rows, cols}) {
         super();
@@ -56,6 +57,7 @@ export default class Grid extends Component {
         this.setState({
             grid: updateGrid
         }, () => this.startNavigation(updateGrid));
+
     }
 
     createGrid = (rows, cells, start, end) => {
@@ -65,13 +67,15 @@ export default class Grid extends Component {
                 if (icell === 0 && irow === start) {
                     return 'start';
                 }
-                if (icell === (cells - 1) && irow === end) {
+
+        if (icell === (cells - 1) && irow === end) {
                     return 'end';
                 }
                 return 'default';
             })));
 
     }
+
 
     startNavigation = (grid) => {
         const {start} = this.state;
@@ -87,18 +91,19 @@ export default class Grid extends Component {
         return (
             <GridWrapper
                 theme={{
-                button: 'default'
-            }}
+                    button: 'default'
+                }}
                 colsNumber={cols}>
                 {grid.map((row, irow) => (row.map((cell, icell) => <Cell
                     key={`cell${irow}_${icell}`}
                     type={(bestPath.includes(`${irow}_${icell}`))
-                    ? 'path'
-                    : cell}
+                        ? 'path'
+                        : cell}
                     onClick={(cell === 'start' || cell === 'end')
-                    ? null
-                    : () => this.handleClick(irow, icell)}/>)))}
+                        ? null
+                        : () => this.handleClick(irow, icell)} />)))}
             </GridWrapper>
+           
         );
     }
 }

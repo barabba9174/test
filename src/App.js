@@ -1,5 +1,4 @@
-import React, {Component} from 'react';
-
+import React, { Component } from 'react';
 import AppView from './views/AppView';
 import AppWrapper, {SyledLogo} from './AppWrapper';
 

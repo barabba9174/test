@@ -1,6 +1,8 @@
-import React, {PureComponent} from 'react';
-import {ThemeProvider} from 'styled-components';
-import {oneOfType, func, node, element, oneOf} from 'prop-types';
+import React, { PureComponent } from 'react';
+import { ThemeProvider } from 'styled-components';
+import {
+    oneOfType, func, node, element, oneOf
+} from 'prop-types';
 import CellWrapper from './CellWrapper';
 
 export default class Cell extends PureComponent {

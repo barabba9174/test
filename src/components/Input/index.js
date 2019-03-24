@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
-import {string, func, oneOfType, number} from 'prop-types';
+import { string, func, oneOfType, number } from 'prop-types';
 import checkValue from './utils';
 import InputWrapper from './InputWrapper';
 
 export default class Input extends Component {
     static defaultProps = {
-        onSubmit: () => {},
+        onSubmit: () => { },
         value: '',
         id: 'idField',
         label: ''
@@ -29,28 +29,27 @@ export default class Input extends Component {
     handleKeyDown = (e) => {
         if (e.keyCode === 13) {
             const {onSubmit} = this.props;
-            const {error, value} = this.state;
-            if (!error) 
-                onSubmit({value, error})
+            const { error, value } = this.state; if (!error)
+                onSubmit({ value, error })
         }
     }
 
     handleChange = (event) => {
         const regex = /^[0-9]{1,2}$/i;
-        const {onSubmit} = this.props;
+        const { onSubmit } = this.props;
 
         const newState = checkValue(event.target.value, regex)
         this.setState(newState, () => onSubmit(newState));
     }
 
     render() {
-        const {value, id, label} = this.props;
-        const {error} = this.state;
+        const { value, id, label } = this.props;
+        const { error } = this.state;
         return (
             <InputWrapper htmlFor={id} error={error} // eslint-disable-next-line no-extra-boolean-cast
-    className={`${ !!error
-                ? ' invalid'
-                : ''}`}>
+                className={`${!!error
+                    ? ' invalid'
+                    : ''}`}>
                 {label}
                 <input
                     type="text"

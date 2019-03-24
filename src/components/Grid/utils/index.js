@@ -10,8 +10,7 @@ export const getForwardCoordsFromQuadrant = (quadrant, x, y) => {
         case 'S':
             return {
                 x,
-                y: y + 1
-            };
+                y: y + 1};
         case 'W':
             return {
                 x: x - 1,
@@ -23,7 +22,7 @@ export const getForwardCoordsFromQuadrant = (quadrant, x, y) => {
                 y: y - 1
             };
         default:
-            return {x: -1, y: -1};
+            return { x: -1, y: -1 };
     }
 };
 

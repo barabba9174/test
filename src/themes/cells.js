@@ -20,6 +20,10 @@ export default theme('cell', {
     `,
     start: css `
         background: #7ed321;
+ border: 0;
+        box-sizing: content-box;
+        -webkit-appearance: button;
+        cursor: default;
     `,
     end: css `
         background: #639530;
