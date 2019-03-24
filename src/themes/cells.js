@@ -31,12 +31,14 @@ export default theme('cell', {
         border: 0;
         box-sizing: content-box;
         -webkit-appearance: button;
+        cursor: default;
     `,
     end: css`
         background: #639530;
         border: 0;
         box-sizing: content-box;
         -webkit-appearance: button;
+        cursor: default;
     `,
     path: css`
         background: #f5a623;

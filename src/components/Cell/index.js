@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { ThemeProvider } from 'styled-components';
 import {
-    oneOfType, func, node, element, oneOf, bool
+    oneOfType, func, node, element, oneOf
 } from 'prop-types';
 import CellWrapper from './CellWrapper';
 
