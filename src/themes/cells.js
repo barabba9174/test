@@ -1,9 +1,9 @@
 import theme from 'styled-theming';
-import { css } from 'styled-components';
+import {css} from 'styled-components';
 
 export default theme('cell', {
 
-    default: css`
+    default: css `
         background: #f1f1f1;
         cursor: pointer;
         &:hover {
@@ -14,19 +14,18 @@ export default theme('cell', {
             background-color: #e2e2e2;
         }
   `,
-    clear: css`
+    clear: css `
         background: #fff;
         cursor: pointer;
     `,
-    start: css`
+    start: css `
         background: #7ed321;
     `,
-    end: css`
+    end: css `
         background: #639530;
     `,
-    path: css`
+    path: css `
         background: #f5a623;
         cursor: pointer;
-    `,
-
+    `
 })

@@ -23,7 +23,7 @@ export const getForwardCoordsFromQuadrant = (quadrant, x, y) => {
                 y: y - 1
             };
         default:
-            return { x: -1, y: -1 };
+            return {x: -1, y: -1};
     }
 };
 
@@ -35,34 +35,50 @@ const bestPathFinder = (paths) => {
     return bestPath[0];
 }
 
-
 export const pathFinder = (grid, prevY, prevX, queue, paths) => {
-    
+
     const actuaQueue = [...queue];
-    
+
     if (actuaQueue.includes('end')) {
         paths.push(actuaQueue)
-        return bestPathFinder([...paths, actuaQueue]);
+        return bestPathFinder([
+            ...paths,
+            actuaQueue
+        ]);
     }
 
     directions.forEach((dir) => {
-        const { x, y } = getForwardCoordsFromQuadrant(dir, prevX, prevY);
+        const {x, y} = getForwardCoordsFromQuadrant(dir, prevX, prevY);
 
         if (grid[y] && grid[y][x]) {
 
             if (grid[y][x] === 'end') {
 
-                const fixAdiacentStartEnd = grid[prevY][prevX] === 'start' ? [] : [`${prevY}_${prevX}`];
+                const fixAdiacentStartEnd = grid[prevY][prevX] === 'start'
+                    ? []
+                    : [`${prevY}_${prevX}`];
 
-                return pathFinder(grid, y, x, [...queue, ...fixAdiacentStartEnd, `end`], paths)
+                return pathFinder(grid, y, x, [
+                    ...queue,
+                    ...fixAdiacentStartEnd,
+                    `end`
+                ], paths)
 
-
-            } if (grid[y][x] === 'clear') {
-                const value = (grid[y][x] === 'start') ? 'start' : `${y}_${x}`;
+            }
+            if (grid[y][x] === 'clear') {
+                const value = (grid[y][x] === 'start')
+                    ? 'start'
+                    : `${y}_${x}`;
                 if (!actuaQueue.includes(value)) {
-                    const elementToAdd = value === 'start' ? [] : [value];
-                    pathFinder(grid, y, x, [...queue, ...elementToAdd], paths)
-                } return actuaQueue;
+                    const elementToAdd = value === 'start'
+                        ? []
+                        : [value];
+                    pathFinder(grid, y, x, [
+                        ...queue,
+                        ...elementToAdd
+                    ], paths)
+                }
+                return actuaQueue;
             }
             return actuaQueue;
         }

@@ -1,16 +1,13 @@
-import React, { PureComponent } from 'react';
-import { ThemeProvider } from 'styled-components';
-import {
-    oneOfType, func, node, element, oneOf
-} from 'prop-types';
+import React, {PureComponent} from 'react';
+import {ThemeProvider} from 'styled-components';
+import {oneOfType, func, node, element, oneOf} from 'prop-types';
 import CellWrapper from './CellWrapper';
 
 export default class Cell extends PureComponent {
     static propTypes = {
         children: oneOfType([node, element, func]),
         onClick: func,
-        type: oneOf(['default', 'clear', 'start', 'end', 'path', 'Visited']),
-       
+        type: oneOf(['default', 'clear', 'start', 'end', 'path'])
     };
 
     static defaultProps = {
@@ -19,14 +16,17 @@ export default class Cell extends PureComponent {
         children: null
     }
 
-    
     render() {
         const {
-            type = 'default', children, onClick} = this.props;
-
+            type = 'default',
+            children,
+            onClick
+        } = this.props;
 
         return (
-            <ThemeProvider theme={{ cell: type }}>
+            <ThemeProvider theme={{
+                cell: type
+            }}>
                 <CellWrapper onClick={onClick}>
                     {children}
                 </CellWrapper>
