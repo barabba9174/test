@@ -62,7 +62,8 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
-# logic
+
+# Logic and notes
 
 
 I didn't use typescript, just because I'm much faster with jsx and preferred to concentrate on a robust algorithm.
