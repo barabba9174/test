@@ -57,19 +57,16 @@ export const pathFinder = (grid, prevY, prevX, queue, paths) => {
                 return pathFinder(grid, y, x, [...queue, ...fixAdiacentStartEnd, `end`], paths)
 
 
-            } else if (grid[y][x] === 'clear') {
+            } if (grid[y][x] === 'clear') {
                 const value = (grid[y][x] === 'start') ? 'start' : `${y}_${x}`;
                 if (!actuaQueue.includes(value)) {
                     const elementToAdd = value === 'start' ? [] : [value];
                     pathFinder(grid, y, x, [...queue, ...elementToAdd], paths)
-                } else {
-                    return actuaQueue;
-                }
+                } return actuaQueue;
             }
             return actuaQueue;
         }
         return actuaQueue;
-
     })
 
     return bestPathFinder(paths);

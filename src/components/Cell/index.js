@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { ThemeProvider } from 'styled-components';
 import {
-    oneOfType, func, node, element, oneOf, bool
+    oneOfType, func, node, element, oneOf
 } from 'prop-types';
 import CellWrapper from './CellWrapper';
 
@@ -14,18 +14,20 @@ export default class Cell extends PureComponent {
     };
 
     static defaultProps = {
-        type: 'default'
+        type: 'default',
+        onClick: () => {},
+        children: null
     }
 
     
     render() {
         const {
-            type = 'default', className = '', children, onClick} = this.props;
+            type = 'default', children, onClick} = this.props;
 
 
         return (
             <ThemeProvider theme={{ cell: type }}>
-                <CellWrapper className={className} onClick={onClick}>
+                <CellWrapper onClick={onClick}>
                     {children}
                 </CellWrapper>
             </ThemeProvider>
