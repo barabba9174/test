@@ -90,18 +90,30 @@ export default class Grid extends Component {
             title: title,
             'aria-label': title,
             disabled: (cell === 'start' || cell === 'end'),
-            'aria-pressed': (cell === 'start' || cell === 'end' || cell === 'clear')
+            'aria-pressed': (cell === 'start' || cell === 'end' || cell === 'clear'),
+            'aria-describedby': "statusDescription"
         }
     }
 
     render() {
-        const {grid, bestPath} = this.state;
-        const {cols} = this.props;
+        const {grid, bestPath, start, end} = this.state;
+        const {cols, rows} = this.props;
         const ariaResultLabel = `Best path found: ${bestPath.join(', ')}`;
 
         return (
             <div>
-                <AriaResult aria-live="polite">{bestPath.length > 0 && ariaResultLabel}</AriaResult>
+                <AriaResult>
+                    <ul id="statusDescription">
+                        <li>Start position {start}_0</li>
+                        <li>End position {end}_{cols - 1}</li>
+                        <li>Grid size {rows} x {cols}</li>
+                    </ul>
+                </AriaResult>
+                <AriaResult aria-live="polite">
+                    {bestPath.length > 0 && (
+                        ariaResultLabel
+                    )}
+                </AriaResult>
                 <GridWrapper
                     theme={{
                     button: 'default'

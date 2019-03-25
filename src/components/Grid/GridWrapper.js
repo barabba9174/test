@@ -12,9 +12,6 @@ export default styled.div`
   border-right: 0;
   border-bottom: 0;
 
-  
-
-
   & button {
     height: ${props => `${((335 - props.colsNumber) / props.colsNumber)}px`};
     width: ${props => `calc(100% * ${(1 / props.colsNumber)} - 1px)`};
