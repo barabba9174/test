@@ -13,6 +13,7 @@ export default styled.button`
     border-bottom: 1px solid #dcdcdc;
     border-right: 1px solid #dcdcdc;
     -webkit-appearance: button;
+    touch-action: manipulation;
     &:focus {
         outline: none;
     }

@@ -18,6 +18,8 @@ export default class Cell extends PureComponent {
         children: null
     }
 
+    disableDoubleTap = () => false; 
+
     render() {
         const {
             type = 'default',
@@ -30,7 +32,8 @@ export default class Cell extends PureComponent {
             <ThemeProvider theme={{
                 cell: type
             }}>
-                <CellWrapper onClick={onClick} {...rest}>
+                <CellWrapper 
+                    onClick={onClick} {...rest}>
                     {children}
                 </CellWrapper>
             </ThemeProvider>

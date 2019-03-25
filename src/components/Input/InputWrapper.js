@@ -19,7 +19,7 @@ export default styled.label`
         box-sizing: border-box;
         text-align: center;
         box-shadow: -1px 2px 5px 0px rgba(0,0,0,0.05);
-        
+        touch-action: manipulation;
     }
 
     &.invalid input {
