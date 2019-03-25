@@ -15,7 +15,9 @@ export default styled.button`
     -webkit-appearance: button;
     touch-action: manipulation;
     &:focus {
-        outline: none;
+        outline-offset: -1px;
+        outline-style: solid;
+        outline-width: 1px;
     }
     ${cells}
 `;  

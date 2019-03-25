@@ -17,6 +17,13 @@ export default theme('cell', {
     clear: css `
         background: #fff;
         cursor: pointer;
+        &:hover {
+            background-color: #f8f8f8;
+            outline: none;
+        }
+        &:active {
+            background-color: #e2e2e2;
+        }
     `,
     start: css `
         background: #7ed321;
