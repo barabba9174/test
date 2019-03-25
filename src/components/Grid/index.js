@@ -116,8 +116,8 @@ export default class Grid extends Component {
                 </AriaResult>
                 <GridWrapper
                     theme={{
-                    button: 'default'
-                }}
+                        button: 'default'
+                    }}
                     colsNumber={cols}>
                     {grid.map((row, irow) => (row.map((cell, icol) => 
                         <Cell
