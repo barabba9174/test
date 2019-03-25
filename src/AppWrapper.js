@@ -14,3 +14,8 @@ export const SyledLogo = styled.img`
     margin-bottom: 34px;
 
 `
+
+export const TitleStyled = styled.h1`
+    position: absolute;
+    left: -1000000px;
+`

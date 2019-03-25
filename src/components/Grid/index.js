@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import Cell from '../Cell';
-import { pathFinder } from './utils';
+import {pathFinder} from './utils';
 
 import {
     oneOfType,
@@ -10,7 +10,7 @@ import {
     bool,
     number
 } from 'prop-types';
-import GridWrapper from './GridWrapper';
+import GridWrapper, {AriaResult} from './GridWrapper';
 
 export default class Grid extends Component {
     static propTypes = {
@@ -20,7 +20,6 @@ export default class Grid extends Component {
         rows: number,
         cols: number
     };
-
 
     constructor({rows, cols}) {
         super();
@@ -68,14 +67,13 @@ export default class Grid extends Component {
                     return 'start';
                 }
 
-        if (icell === (cells - 1) && irow === end) {
+                if (icell === (cells - 1) && irow === end) {
                     return 'end';
                 }
                 return 'default';
             })));
 
     }
-
 
     startNavigation = (grid) => {
         const {start} = this.state;
@@ -84,26 +82,43 @@ export default class Grid extends Component {
         this.setState({bestPath})
     }
 
+    getAccessibilityAttributes = (row, col, cell) => {
+        const title = (cell === 'start' || cell === 'end')
+            ? cell
+            : `${row}_${col}`;
+        return {
+            title: title,
+            'aria-label': title,
+            disabled: (cell === 'start' || cell === 'end'),
+            'aria-pressed': (cell === 'start' || cell === 'end' || cell === 'clear')
+        }
+    }
+
     render() {
         const {grid, bestPath} = this.state;
         const {cols} = this.props;
+        const ariaResultLabel = `Best path found: ${bestPath.join(', ')}`;
 
         return (
-            <GridWrapper
-                theme={{
+            <div>
+                <AriaResult aria-live="polite">{bestPath.length > 0 && ariaResultLabel}</AriaResult>
+                <GridWrapper
+                    theme={{
                     button: 'default'
                 }}
-                colsNumber={cols}>
-                {grid.map((row, irow) => (row.map((cell, icell) => <Cell
-                    key={`cell${irow}_${icell}`}
-                    type={(bestPath.includes(`${irow}_${icell}`))
-                        ? 'path'
-                        : cell}
-                    onClick={(cell === 'start' || cell === 'end')
-                        ? null
-                        : () => this.handleClick(irow, icell)} />)))}
-            </GridWrapper>
-           
+                    colsNumber={cols}>
+                    {grid.map((row, irow) => (row.map((cell, icol) => 
+                        <Cell
+                            key={`cell${irow}_${icol}`}
+                            type={(bestPath.includes(`${irow}_${icol}`))
+                            ? 'path'
+                            : cell}
+                            onClick={() => this.handleClick(irow, icol)}
+                            {...this.getAccessibilityAttributes(irow, icol, cell)}
+                        />)))}
+                </GridWrapper>
+            </div>
+
         );
     }
 }

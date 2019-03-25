@@ -22,14 +22,15 @@ export default class Cell extends PureComponent {
         const {
             type = 'default',
             children,
-            onClick
+            onClick,
+            ...rest
         } = this.props;
 
         return (
             <ThemeProvider theme={{
                 cell: type
             }}>
-                <CellWrapper onClick={onClick}>
+                <CellWrapper onClick={onClick} {...rest}>
                     {children}
                 </CellWrapper>
             </ThemeProvider>

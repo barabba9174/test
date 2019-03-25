@@ -1,6 +1,17 @@
 import styled from 'styled-components';
 
-export default styled.div `
+export default styled.fieldset `
+    margin: 0;
+    padding: 0;
+    border: 0;
+    & legend {
+        position: absolute;
+        left: -100000px;
+    }
+`;
+
+
+export const BoxWrapper = styled.div`
     background: #f1f1f1;
     padding: 18px 28px;
     margin-bottom: 28px;

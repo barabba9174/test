@@ -20,7 +20,7 @@ export default class Button extends PureComponent {
             <ThemeProvider theme={{
                 button: 'default'
             }}>
-                <ButtonWrapper onClick={onClick} {...rest}>
+                <ButtonWrapper onClick={onClick} autocomplete="off" {...rest}>
                     {children}
                 </ButtonWrapper>
             </ThemeProvider>

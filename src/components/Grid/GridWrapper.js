@@ -19,3 +19,9 @@ export default styled.div`
   }
 
 `;  
+
+
+export const AriaResult = styled.div`
+  position: absolute;
+  left: -100000px;
+`

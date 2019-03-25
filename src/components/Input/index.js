@@ -45,6 +45,7 @@ export default class Input extends Component {
     render() {
         const { value, id, label } = this.props;
         const { error } = this.state;
+        const errorId = `error${id}`;
         return (
             <InputWrapper htmlFor={id} error={error} // eslint-disable-next-line no-extra-boolean-cast
                 className={`${!!error
@@ -56,8 +57,9 @@ export default class Input extends Component {
                     id={id}
                     onChange={this.handleChange}
                     onKeyDown={this.handleKeyDown}
+                    aria-describedby={errorId}
                     defaultValue={value}/>
-                <div className="error">{error}</div>
+                <div className="error" id={errorId}>{error}</div>
             </InputWrapper>
         );
     }
