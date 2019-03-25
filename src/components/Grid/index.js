@@ -82,16 +82,20 @@ export default class Grid extends Component {
         this.setState({bestPath})
     }
 
-    getAccessibilityAttributes = (row, col, cell) => {
+    getAttributes = (row, col, cell, bestPath) => {
         const title = (cell === 'start' || cell === 'end')
             ? cell
             : `${row}_${col}`;
+        const inBestPath = bestPath.includes(`${row}_${col}`);
         return {
             title: title,
-            'aria-label': title,
+            'aria-label': `${title}${inBestPath ? ' in path' : ''}`,
             disabled: (cell === 'start' || cell === 'end'),
             'aria-pressed': (cell === 'start' || cell === 'end' || cell === 'clear'),
-            'aria-describedby': "statusDescription"
+            'aria-describedby': "statusDescription",
+            type: (inBestPath)
+                ? 'path'
+                : cell
         }
     }
 
@@ -122,11 +126,8 @@ export default class Grid extends Component {
                     {grid.map((row, irow) => (row.map((cell, icol) => 
                         <Cell
                             key={`cell${irow}_${icol}`}
-                            type={(bestPath.includes(`${irow}_${icol}`))
-                            ? 'path'
-                            : cell}
                             onClick={() => this.handleClick(irow, icol)}
-                            {...this.getAccessibilityAttributes(irow, icol, cell)}
+                            {...this.getAttributes(irow, icol, cell, bestPath)}
                         />)))}
                 </GridWrapper>
             </div>
