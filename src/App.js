@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import AppView from './views/AppView';
-import AppWrapper, { SyledLogo, TitleStyled } from './AppWrapper';
+import AppWrapper, { SyledLogo, TitleStyled} from './AppWrapper';
 
 // eslint-disable-next-line react/prefer-stateless-function
 export default class App extends Component {

@@ -74,5 +74,7 @@ I've kept the option '2' for rows and columns, but when 'start' and 'end' are ne
 
 The logic is: navigate the 4 directions, in a recursive function, starting from 'start', continuing to navigate until there is a 'clear' and then saving the position only when 'end' is reached.
 
-I took a look at the existing bfs library, but then I decided to create my own custom function ('pathFinder' inside https://github.com/barabba9174/test/blob/master/src/components/Grid/utils/index.js) 
+I took a look at the existing bfs library, but then I decided to create my own custom function ('pathFinder' inside https://github.com/barabba9174/test/blob/master/src/components/Grid/utils/index.js)
+
+I've added accessibility features, so the tool can be used by screen readers users.
 
