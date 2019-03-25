@@ -28,7 +28,7 @@ export const getForwardCoordsFromQuadrant = (quadrant, x, y) => {
 
 const bestPathFinder = (paths) => {
     if (paths.length < 1) {
-        return paths;
+        return [];
     }
     const bestPath = [...paths].sort((a, b) => a.length - b.length);
     return bestPath[0];
